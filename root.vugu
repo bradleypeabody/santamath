@@ -1,0 +1,201 @@
+<html>
+
+<head>
+    <title>The Mathematics of Santa</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body class="bodybg">
+    <div>
+        <div class="container">
+            <h1 class="mt-2">Could Santa Be Real?</h1>
+            <h2>Do the Math</h2>
+
+            <p class="italic">If you sit down to do some (even really rough, approximate) math on Santa Claus,
+                one quickly realizes that completely aside from the work he does with his elves and Mrs. Claus
+                and whoever else is on Team Claus to make all those presents, there are some 
+                serious physics problems as well when it comes to delivery.
+            </p>
+
+            <p class="italic">
+                While various theories could account for how Santa is able to hold so much stuff on his sleigh and move it
+                around so quickly, we're going to assume here that Santa has some sort of 
+                <a target="_blank" href="https://www.imdb.com/title/tt0708812/">matter</a> 
+                <a target="_blank" href="https://www.youtube.com/watch?v=OAlLR2u3HUQ">phasing</a>
+                <a target="_blank" href="https://memory-alpha.fandom.com/wiki/The_Next_Phase_(episode)">technology.</a>
+                This solves the space problem by allowing his presents to occupy overlapping space.
+                We're also going to assume that matter phasing accounts for how he is able to travel
+                so quickly without resistance from the atmosphere, as well as how he can deliver
+                these presents without slowing down.
+            </p>
+
+            <p class="italic">
+                Even with the above concessions, there are other parts of Santa Claus mythology that still don't 
+                fit well.  For example how Santa is supposed to be traveling in a matter-phased vessel at insane 
+                speeds and also manages to be sliding down your chimney...  I posit some sort of cloning technology could 
+                answer this.  Each time a present is dropped off, the real Santa remains on his ship.  A Santa clone collects
+                the presents for a specific household and is ejected off the ship, possibly with a parachute, and is 
+                then phased back in tune with regular matter mid-air. At this piont he can land on the roof of the target house,
+                deliver the presents, eat the cookies and milk and wave hi to the little kids etc and then make his 
+                escape.  His exit is less time critical, so possibly a followup vessel could come and collect up
+                the Santa clones.  However, thousands or millions of Santa clones remaining after this operation
+                raises some serious 
+                human rights and medical ethics concerns. Possibly these Santas are robots, that could mitigate the 
+                ethical implications somewhat.
+            </p>
+
+            <p class="italic">
+                Below are some knobs you can turn to get an estimated average velocty for Santa's "sleigh",
+                along with a few classes of vessel that give the general idea of what is required to obtain 
+                that speed.  <strong>For example, if you decrease the average distance between delivery to
+                something like 0.0001 or 0.00001, you get a slower vessel.</strong>
+            </p>
+            
+            <p class="italic">
+                Have a Merry Christmas, Happy Holidays or whatever this time of year means to you!
+            </p>
+
+            <form>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="fam_size">World Population</label>
+                            <input class="form-control" type="number" .value='c.WorldPopulation'
+                                @change='c.WorldPopulation, _ = strconv.ParseFloat(event.PropString("target", "value"), 64)' />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="fam_size">Average Family Size</label>
+                            <input class="form-control" type="number" .value='c.FamilySize'
+                                @change='c.FamilySize, _ = strconv.ParseFloat(event.PropString("target", "value"), 64)' />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="fam_size">Average Distance Between Deliveries (km)</label>
+                            <input class="form-control" type="number" .value='c.AverageDistanceBetweenDeliveriesKm'
+                                @change='c.AverageDistanceBetweenDeliveriesKm, _ = strconv.ParseFloat(event.PropString("target", "value"), 64)' />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="fam_size">Nice Ratio % (as opposed to Naughty): <span
+                                    vg-html='fmt.Sprintf("%.0f%%", c.NiceRatioPct)'></span></label>
+                            <input class="form-control" type="range" min="1" max="99" .value='c.NiceRatioPct'
+                                @change='c.NiceRatioPct, _ = strconv.ParseFloat(event.PropString("target", "value"), 64)' />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <hr />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <label>Average Sleigh Velocity (km/h)</label>
+                        <input class="form-control" type="number" .value='c.averageVelocityKmh' disabled />
+                    </div>
+                    <div class="col">
+
+                        <main:VesselDisplay :TargetVelocityKmh="c.averageVelocityKmh"/>
+
+                    </div>
+                </div>
+
+            </form>
+
+            <div>
+
+                <hr />
+
+                <div>Photo Credits:</div>
+                <ul>
+                    <li><a target="_blank"
+                            href="https://www.flickr.com/photos/briarcraft/16683926323/in/photolist-rqiu38-4nsseY-dyH3vQ-4eKyQV-2hX6qta-2hVEEZa-Q9GMTB-5GQjeg-b848Ck-2ai8rCo-2hYdFxM-aSZQ-299ZBYi-b38w-9a8CfY-21wd74j-234AjN6-2g3hYb2-QxcAzT-5RxN9E-vyE5Q-2g3iGk6-S9qgTE-5RxMLW-7zVkup-PFh9JS-BBzHSy-21f2KhL-7nu36V-8Y9Ekc-B91mYM-iv68eA-ZRNLMj-29GYxib-4yD85W-CoVXzr-4ctS1X-bAeM4M-bAeMuV-iBo1aL-dDjfNG-7wosVo-aRy9Ea-52QSiD-fFcgkm-4EuZCF-6XPMgs-a4pRMW-uAxFW-BFCnLL">Sleigh:
+                            Northwest Carriage Museum</a></li>
+                    <li><a target="_blank"
+                            href="https://www.flickr.com/photos/didmyself/8158958138/in/photolist-dqYN13-ikehiG-98KWFi-pbGWY7-23m6joD-P3mtro-ixKnMf-dCZZCa-Mq6PT8-Pf8eLU-dyXpKw-92qbeo-dyRX98-aW1J8H-dXXj5N-izPJWY-ivGBsr-5QBeHW-hVXirm-91iwkH-CdWbe2-dF5Vco-68Zs74-4aqrjD-Prufxw-PMzGHn-hP3ksB-P9NJV5-hQij4S-CESmRZ-BDvsoc-A6RmVx-dy5YC2-2a7FiVd-2bdc52R-2b8R8jY-MpYJoV-2a7FxNJ-2b8PT4A-2a7C7MY-2b8QDfm-P5sUa7-28sdNx9-P5tTmG-MshSTn-29MzM8r-29PQBbk-2b8R21f-2b8NFqC-P5r4hj">Christmas
+                            Lights based on Daniel Kulinski's Photo</a></li>
+                    <li>
+                        <a target="_blank"
+                            href="https://www.flickr.com/photos/sockrotation/6449829303/in/photolist-aPX4xv-KgxMB5-2fgNutr-JL8Pby-eNPvZ-kddhd-8JbUGM-pEJ2j-8JeY7W-dQA9pk-bCa4M9-5LpkUx-ep9fc-ep97s-8oVhnJ-bRcLYt-2gsTBip-8oS7rt-cQGqYC-pEHEb-52mgm6-8oVhw1-4ovVT2-52qzhw-8oVfTW-djeBj3-8oS6Aa-8oS7gX-8oVgZG-pEHP2-pEHCk-8oS6N2-8oVgNu-pEHFC-JNVnyF-pEHAm-KDPXUm-8oVe5C-dpJ24-JL8PsA-2h66e5b-ejGt2x-aQkRUr-ejGyot-a2kKs8-dUYm2Z-KDPXJG-KxjgyS-9KBuLa-ampwHi">
+                            Star Ship Enterprise
+                        </a></li>
+
+                    <li><a target="_blank"
+                            href="https://www.flickr.com/photos/airmanmagazine/14521066809/in/photolist-o8bgfR-o8cnT6-4A2bcD-onD4KA-ZZHXNu-5f9sP-SJqN4b-V8439R-aVrs9k-2aMXBgr-9sw5i8-M2ZRs4-WrYeJ5-M4xJKV-sMHw9-Dj7Jh-5Mn3N9-f7xxe-a2rJpv-Dj7Jw-f5aVeS-6DYpw5-73s7vY-dm9cZV-dm9hpj-ioddx-8u4VUU-iRGVx6-7cqRXJ-f4V16B-dm9hvA-7cqR63-3Zu4y-67bDnW-2fee9Pf-RxG7dk-2gKasRb-pzxYEx-2gKbbc3-4JxG8R-f5aGd9-a6sYwk-edD7fA-8CMD73-rQRUss-8u4VJL-3Zu7u-GWwig-8u1Qoa-4JxDtv">
+                            SR-71 Blackbird
+                        </a></li>
+
+                    <li><a target="_blank"
+                            href="https://www.flickr.com/photos/134154205@N08/18869348245/in/photolist-uKqkQr-2eF1Ff2-pQWKhQ-2cN8vs9-2gA3jRb-QRLnSe-PwsbU4-2gwNkTP-2guoGfp-XkT16b-szq8S1-2dzpRwo-2gNpsQi-2dGTqFM-2gQKLcg-WdjMGT-T1QvYX-ZeiqUC-2gmRatU-P9kecB-2gvM35A-5svH2W-2cVAjWa-24yvfuJ-8qsce9-2hbRyhr-8L68ZG-7r2D2R-qD3wza-z3eAPn-Q7kV1e-o4jACP-vXxEtL-waEopP-4gmeLu-rHcksv-2e5wFsa-uKVFTy-2eaCTBL-2giycR7-onZGwV-2hCHQCU-265SCan-2h81z2p-RM5UzB-2g7ykfh-ZMo6nh-NhSp9B-2hdPqFD-Xreoze">
+                            New Horizons
+                        </a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>
+
+<style>
+    .bodybg {
+        background: url("background.jpg");
+    }
+    .italic {
+        font-style: italic;
+    }
+</style>
+
+<script type="application/x-go">
+
+import "log"
+import "strconv"
+
+type Root struct {
+    WorldPopulation float64 `vugu:"data"`
+    FamilySize float64 `vugu:"data"`
+    AverageDistanceBetweenDeliveriesKm float64 `vugu:"data"`
+    NiceRatioPct float64 `vugu:"data"`
+
+    vesselMaxVelocityKmh float64
+    averageVelocityKmh float64
+}
+
+func (c *Root) BeforeBuild() {
+    if !(c.WorldPopulation >= 1) {
+        c.WorldPopulation = 7000000000
+    }
+    if !(c.FamilySize >= 1) {
+        c.FamilySize = 3.14
+    }
+    if !(c.AverageDistanceBetweenDeliveriesKm > 0) {
+        c.AverageDistanceBetweenDeliveriesKm = 0.2
+    }
+    if !(c.NiceRatioPct > 0) {
+        c.NiceRatioPct = 80
+    }
+
+    // approximate number of delivery stops...
+    numStops := c.WorldPopulation * (c.NiceRatioPct/100.0) / c.FamilySize
+
+    totDistance := numStops * c.AverageDistanceBetweenDeliveriesKm
+
+    log.Printf("totDistance: %v", totDistance)
+    
+    c.averageVelocityKmh = totDistance / 24.0
+
+}
+
+</script>

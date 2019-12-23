@@ -1,0 +1,80 @@
+<div>
+
+
+    <div vg-if='c.vtype=="sleigh"'>
+
+        <label>Vessel Class Required: <strong>Traditional Santa's Sleigh</strong><br />
+            Maximum Velocity: <strong>134 km/h</strong>
+            </label>
+        <img class="col-12" :src='c.vtype+".jpg"' />
+    
+    </div>
+
+    <div vg-if='c.vtype=="sr71blackbird"'>
+
+        <label>Vessel Class Required: <strong>SR-71 Blackbird</strong><br />
+            Maximum Velocity: <strong>3,529 km/h</strong>
+            </label>
+        <img class="col-12" :src='c.vtype+".jpg"' />
+    
+    </div>
+
+    <div vg-if='c.vtype=="new-horizons"'>
+
+        <label>Vessel Class Speed Equivalence: <strong>New Horizons Probe</strong><br />
+            Maximum Velocity: <strong>58,500 km/h</strong><br/>
+            </label>
+        <img class="col-12" :src='c.vtype+".jpg"' />
+    
+    </div>
+
+    <div vg-if='c.vtype=="enterprise"'>
+
+        <label>Vessel Class Required: <strong>Star Trek: Enterprise (NCC-1701-D)</strong><br />
+            Maximum Velocity: <strong>Warp 9.9 (~6.5 billion km/sec)</strong>
+            </label>
+        <img class="col-12" :src='c.vtype+".jpg"' />
+    
+    </div>    
+
+</div>
+
+<script type="application/x-go">
+
+type VesselDisplay struct {
+
+    TargetVelocityKmh float64 `vugu:"data"`
+
+    vtype string
+}
+
+func (c *VesselDisplay) BeforeBuild() {
+
+    // pick appropriate type based on speed (corresponds to image file name)
+    switch {
+
+        case c.TargetVelocityKmh < 134.368:
+            // we're going to go with this number for a sleigh's max speed - reindeer are not very fast,
+            // so the max downhill velocity on a sled will be close enough for our purposes
+            // https://www.guinnessworldrecords.com/world-records/fastest-speed-on-a-gravity-powered-snow-sled?fb_comment_id=767632963314515_1082632258481249
+            c.vtype = "sleigh"
+
+
+        case c.TargetVelocityKmh < 3529.291:
+            // speed from random google search, forgot where;
+            // the wikipedia page has similar speeds listed from various flights
+            c.vtype = "sr71blackbird"
+
+
+        case c.TargetVelocityKmh < 58500:
+            // speed is per this: https://ourplnt.com/new-horizons-spacecraft-speed/
+            c.vtype = "new-horizons"
+
+        default:
+            c.vtype = "enterprise"
+
+    }
+
+}
+
+</script>
